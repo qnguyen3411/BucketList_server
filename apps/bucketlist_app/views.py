@@ -11,11 +11,8 @@ def index(self):
 def tasks(request):
     if request.method == "GET":
         tasks = Task.objects.all()
-        print(tasks)
         return JsonResponse({'tasks': list(tasks.values())})
     else :
-        print("WE GOT A POST REQUEST OVA HEre")
-        print(request.POST)
         if 'objective' in request.POST:
             Task.objects.create(objective=request.POST['objective'])
         return HttpResponse("YEEEEEEEEEEEEEEEEEEBOI")
