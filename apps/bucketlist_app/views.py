@@ -16,3 +16,23 @@ def tasks(request):
         if 'objective' in request.POST:
             Task.objects.create(objective=request.POST['objective'])
         return HttpResponse("YEEEEEEEEEEEEEEEEEEBOI")
+
+@csrf_exempt
+def update_tasks(request, id):
+    if request.method == "POST":
+        try:
+            this_task = Task.objects.get(id=id)
+            this_task.objective = request.POST['objective']
+            this_task.save()
+        except:
+            print("ERROR TRYING TO UPDATE")
+    return HttpResponse("YEEEEEEEEEEEEEEEEEEBOI")
+
+def delete_tasks(request, id):
+    try:
+        this_task = Task.objects.get(id=id)
+        this_task.delete()
+        print("DELETE SUCCESSFUL")
+    except:
+        print("ERROR TRYING TO DELETE")
+    return HttpResponse("YEEEEEEEEEEEEEEEEEEBOI")
